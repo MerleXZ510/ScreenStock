@@ -234,7 +234,7 @@ def __reCrawlLostData(conn, time_sleep):
             __create_lostdata(conn,(date_,))
             time.sleep(2)
         # 爬取資料失敗超過10次 判讀為假日
-        if list_date.count(date_) >= 10:
+        if list_date.count(date_) >= 5:
             #print(list_date.count(date_))
             __del_lostdata(conn, date_)
         conn.commit()

@@ -243,7 +243,7 @@ def __reCrawlLostData(conn, time_sleep):
             __create_lostdata(conn,(date_,))
             time.sleep(2)
         # 爬取資料失敗超過10次 判讀為假日
-        if list_date.count(date_) > 10:
+        if list_date.count(date_) > 5:
             #print(list_date.count(date_))
             __del_lostdata(conn, date_)
         conn.commit()
@@ -295,7 +295,7 @@ def update(conn, time_sleep, start_date = None):
 
 """##主程式 (呼叫方法)"""
 
-DB_name = 'Data/taiwan_stock_data_20190224.db'
+DB_name = 'StockData/taiwan_stock_data.db'
 
 #建立表格
 #成功表
@@ -307,7 +307,7 @@ create_table_fail(DB_name)
 conn = __create_connection(DB_name)
 
 #更新
-time_sleep = 10
+time_sleep = 5
 start_date = datetime.datetime.strptime("2004-02-11 16:00:01", "%Y-%m-%d %H:%M:%S")
 #update(conn, time_sleep, start_date)
 update(conn, time_sleep)
