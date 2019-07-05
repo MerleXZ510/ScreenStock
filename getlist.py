@@ -3,6 +3,8 @@ import talib
 import crawlerStockServes_TW
 import pandas as pd
 
+###設定條件選股票
+
 #連線
 def __create_connection(db_file):
     """ create a database connection to the SQLite database
@@ -56,8 +58,10 @@ for stockid in stocklist:
     upma = close_data - sma_20
 
     if volume_data[-2] != 0:
-        #突破20MA
-        condition_1 = (upma[-1] > 0 and upma[-2] < 0)
+        #20MA之上
+        condition_1 = upma[-1] > 0
+        #突破20MA 當日突破
+        condition_1_2 =  upma[-1] > 0 and upma[-2] < 0
         #交易量為前日兩倍以上
         condition_2 = volume_data[-1]/volume_data[-2] > 2 
         #成交金額大於1000萬
